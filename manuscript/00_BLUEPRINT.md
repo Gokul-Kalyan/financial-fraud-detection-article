@@ -1,7 +1,7 @@
 # Financial Fraud Detection Article Blueprint
 
 ## 1. Working Title
-
+From an Online Scam to Building an End-to-End Financial Fraud Detection Pipeline
 ---
 
 ## 2. Article Objective
