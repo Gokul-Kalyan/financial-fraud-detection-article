@@ -5,7 +5,7 @@ From an Online Scam to Building an End-to-End Financial Fraud Detection Pipeline
 ---
 
 ## 2. Article Objective
-
+To document the complete engineering journey of building an end-to-end machine learning pipeline for financial transaction fraud detection, from problem motivation and data exploration to model development, evaluation, deployment, and project documentation. The article aims to share practical engineering decisions, challenges, and lessons learned while remaining technically accurate and reproducible.
 ---
 
 ## 3. Target Audience
