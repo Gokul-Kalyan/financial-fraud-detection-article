@@ -1,0 +1,20 @@
+title: Building an End-to-End Financial Fraud Detection System with Machine Learning
+
+subtitle: >
+  A practical walkthrough of designing, evaluating,
+  and deploying a production-ready fraud detection system.
+
+author: Gokul Kalyan
+
+chapters:
+  - manuscript/01_INTRODUCTION.md
+  - manuscript/02_FINANCIAL_FRAUD.md
+  - manuscript/03_PROJECT_OVERVIEW.md
+  - manuscript/04_DATASET.md
+  - manuscript/05_EDA.md
+  - manuscript/06_FEATURE_ENGINEERING.md
+  - manuscript/07_MODEL_DEVELOPMENT.md
+  - manuscript/08_MODEL_EVALUATION.md
+  - manuscript/09_DEPLOYMENT.md
+  - manuscript/10_LESSONS_LEARNED.md
+  - manuscript/11_CONCLUSION.md
