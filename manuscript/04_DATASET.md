@@ -8,19 +8,9 @@ This project uses the **Financial Fraud Detection Dataset** published on Kaggle 
 
 The dataset consists of eleven attributes describing different aspects of each transaction. Together, these features capture transaction metadata, account balances before and after the transaction, and the target labels used for fraud detection.
 
-| Feature          | Description                                                                                |
-| ---------------- | ------------------------------------------------------------------------------------------ |
-| `step`           | Represents the time step at which the transaction occurred.                                |
-| `type`           | Type of transaction (CASH-IN, CASH-OUT, DEBIT, PAYMENT, or TRANSFER).                      |
-| `amount`         | Monetary value of the transaction.                                                         |
-| `nameOrig`       | Identifier of the originating account.                                                     |
-| `oldbalanceOrg`  | Account balance before the transaction.                                                    |
-| `newbalanceOrig` | Account balance after the transaction.                                                     |
-| `nameDest`       | Identifier of the destination account.                                                     |
-| `oldbalanceDest` | Destination account balance before the transaction.                                        |
-| `newbalanceDest` | Destination account balance after the transaction.                                         |
-| `isFraud`        | Target variable indicating whether the transaction is fraudulent.                          |
-| `isFlaggedFraud` | Indicates whether the transaction was flagged by the system according to predefined rules. |
+![Figure 2: Dataset Features Description](../figures/2_dataset.png)
+
+*Figure 2. Dataset features description showing the key attributes, their descriptions, data types, and representative values used in the financial fraud detection dataset.*
 
 The **`isFraud`** column serves as the target variable for supervised learning, where a value of **1** represents a fraudulent transaction and **0** represents a legitimate transaction.
 
@@ -29,6 +19,10 @@ The **`isFraud`** column serves as the target variable for supervised learning, 
 One of the first observations from exploring the dataset is that fraudulent transactions represent only a very small proportion of all transactions. Most records correspond to legitimate financial activity, while fraudulent transactions form a minority class.
 
 This imbalance introduces one of the most significant challenges in fraud detection. A model trained without considering the imbalance may achieve an excellent accuracy score simply by predicting every transaction as legitimate. Such a model would appear highly accurate while failing to identify the very transactions it is intended to detect.
+
+![Figure 3: Transaction Distribution - Fraud vs Legitimate](../figures/3_transaction_distribution.png)
+
+*Figure 3. Distribution of legitimate and fraudulent transactions in the dataset. Fraudulent transactions account for only 0.13% of all transactions, highlighting the severe class imbalance that motivates the choice of evaluation metrics and modeling strategy.*
 
 For this reason, evaluating fraud detection models requires metrics that go beyond overall accuracy. Precision, recall, and the F1-score provide a more meaningful assessment because they measure how effectively the model identifies fraudulent transactions while minimizing false alarms.
 

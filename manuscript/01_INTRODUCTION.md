@@ -11,3 +11,4 @@ Driven by that curiosity, I decided to build an end-to-end machine learning pipe
 This article documents that engineering journey. Rather than presenting only the final results, I will walk through the decisions, challenges, and lessons that shaped the project from start to finish. Whether you're a machine learning enthusiast, a student building your first end-to-end project, or an aspiring ML engineer looking to strengthen your portfolio, I hope this article provides practical insights into building a complete machine learning solution.
 
 Let's begin by understanding the problem of financial transaction fraud and why it remains one of the most challenging applications of machine learning.
+

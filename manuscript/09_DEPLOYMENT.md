@@ -1,11 +1,16 @@
 # Deployment
 
-Building an accurate model was only part of the project. The final objective was to make it accessible through a production-oriented inference pipeline capable of processing new transactions consistently and reliably.
+Developing an accurate fraud detection model was only part of the project. To demonstrate how machine learning systems operate in production, the final solution was deployed as a RESTful API while incorporating practices that improve reproducibility, monitoring, and long-term maintainability.
 
-Each incoming transaction first undergoes **Pydantic validation** to ensure that the request contains valid and complete information. The validated data is then passed through the same feature preparation pipeline used during model training, ensuring that inference remains consistent with the training process.
+Incoming transaction requests are first validated using Pydantic before undergoing the same preprocessing and feature engineering steps applied during training. The processed transaction is then evaluated by the production CatBoost model, which was configured with auto_class_weights="Balanced" to efficiently address class imbalance without requiring oversampled training data during deployment. Based on the predicted fraud probability, the API returns an appropriate decision while recording the transaction and prediction outcome for future analysis.
 
-The processed features are evaluated by the trained **CatBoost** model, which produces a fraud probability. Instead of returning only a binary prediction, the system applies a simple decision engine to classify the transaction into operational outcomes such as **Approve**, **Verify**, or **Block** based on predefined probability thresholds.
+To ensure reproducible experimentation, MLflow was integrated into the training pipeline. Each training run records model parameters, evaluation metrics, and generated artifacts, allowing different experiments to be compared and reproduced. The selected production model is registered and versioned before being exported for deployment, separating experiment management from the inference service.
 
-Every prediction is logged in a **PostgreSQL** database for traceability and future analysis before the API returns a structured JSON response to the client.
+Beyond deployment, the platform incorporates data drift detection to monitor whether incoming transaction data continues to follow the statistical characteristics of the training dataset. Detecting distributional changes provides an early indication that model performance may degrade over time and that retraining could be required.
 
-This deployment demonstrates how a trained machine learning model can be integrated into a complete inference workflow, transforming experimental results into a practical fraud detection service.
+Together, automated deployment, experiment tracking, and continuous monitoring transform the project from a standalone machine learning model into a production-oriented fraud detection platform that follows modern MLOps practices.
+
+
+![Figure 7: Production ML Lifecycle](../figures/7_MLflow_lifecycle.png)
+
+*Figure 7. End-to-end machine learning lifecycle illustrating experiment tracking with MLflow, model registration, production deployment through FastAPI, and continuous monitoring using data drift detection to support reliable long-term operation.*

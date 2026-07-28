@@ -10,4 +10,8 @@ Among the evaluated models, **CatBoost** consistently delivered the strongest ov
 
 The selected CatBoost model was then saved and integrated into the deployment pipeline, forming the core of the fraud detection system presented in this project.
 
+![Figure 5: Model Evolution](../figures/5_model_evolution.png)
+
+*Figure 5. Evolution of the model development process, from addressing class imbalance with SMOTE during experimentation to selecting a production-ready CatBoost model using built-in balanced class weights for a simpler and more memory-efficient deployment pipeline.*
+
 The following chapter evaluates the performance of the selected model in greater detail and compares its results against the alternative approaches considered during development.

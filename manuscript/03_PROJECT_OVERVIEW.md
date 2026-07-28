@@ -14,27 +14,9 @@ Beyond model development, the project also focused on deployment and usability. 
 
 The complete workflow followed throughout the project is illustrated below.
 
-```text
-Financial Transaction Data
-            │
-            ▼
-Data Preprocessing
-            │
-            ▼
-Exploratory Data Analysis
-            │
-            ▼
-Feature Engineering
-            │
-            ▼
-Model Development
-            │
-            ▼
-Model Evaluation
-            │
-            ▼
-Streamlit Deployment
-```
+![Figure 1: Overall System Architecture](../figures/1_Overall_system_architecture.png)
+
+*Figure 1. Overall architecture of the end-to-end financial fraud detection system, illustrating the inference pipeline from API request to fraud decision and transaction logging.*
 
 Rather than viewing these stages as independent tasks, they should be considered interconnected components of a single machine learning pipeline. Decisions made during data preparation influence feature engineering, feature engineering affects model performance, and model evaluation ultimately determines the suitability of the deployed solution.
 
