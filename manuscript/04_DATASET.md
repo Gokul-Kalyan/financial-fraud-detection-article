@@ -8,7 +8,7 @@ This project uses the **Financial Fraud Detection Dataset** published on Kaggle 
 
 The dataset consists of eleven attributes describing different aspects of each transaction. Together, these features capture transaction metadata, account balances before and after the transaction, and the target labels used for fraud detection.
 
-![Figure 2: Dataset Features Description](../figures/2_dataset.png)
+![](../figures/2_dataset.png)
 
 *Figure 2. Dataset features description showing the key attributes, their descriptions, data types, and representative values used in the financial fraud detection dataset.*
 
@@ -20,7 +20,7 @@ One of the first observations from exploring the dataset is that fraudulent tran
 
 This imbalance introduces one of the most significant challenges in fraud detection. A model trained without considering the imbalance may achieve an excellent accuracy score simply by predicting every transaction as legitimate. Such a model would appear highly accurate while failing to identify the very transactions it is intended to detect.
 
-![Figure 3: Transaction Distribution - Fraud vs Legitimate](../figures/3_transaction_distribution.png)
+![](../figures/3_transaction_distribution.png)
 
 *Figure 3. Distribution of legitimate and fraudulent transactions in the dataset. Fraudulent transactions account for only 0.13% of all transactions, highlighting the severe class imbalance that motivates the choice of evaluation metrics and modeling strategy.*
 

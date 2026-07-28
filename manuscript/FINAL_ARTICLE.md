@@ -11,7 +11,7 @@
 
 A few months ago, I came across an online store advertising premium shirts at an unbelievably low price. The website looked convincing, the offer seemed genuine, and I completed the purchase without giving it much thought. Days passed with no order confirmation, no shipment updates, and eventually, I realized I had fallen victim to an online shopping scam.
 
-Fortunately, the financial loss was small. What stayed with me, however, was not the ₹200 I lost but the question it raised: **How do financial systems identify and stop fraudulent transactions?** That curiosity became the starting point of this project.
+What stayed with me was not the money I lost, but the curiosity the experience sparked: **How do financial systems identify and stop fraudulent transactions?** That curiosity became the starting point of this project.
 
 That question led me down a path I hadn't expected. I began exploring how banks and payment platforms detect fraudulent transactions, the challenges they face, and the role machine learning plays in identifying suspicious patterns hidden within millions of legitimate transactions. The more I learned, the more I realized that building an effective fraud detection system involves far more than training a machine learning model.
 
@@ -56,11 +56,11 @@ Once the data was understood, the next stage involved preparing it for model dev
 
 Several machine learning algorithms were then trained and compared to identify the model that provided the best balance between fraud detection capability and prediction reliability. Each model was evaluated using multiple performance metrics, enabling a comprehensive comparison rather than depending on a single score.
 
-Beyond model development, the project also focused on deployment and usability. The final model was integrated into an interactive **Streamlit** application that allows users to enter transaction details and receive fraud predictions through a simple web interface. To improve reproducibility and maintainability, the project was organized using a structured repository with comprehensive documentation covering every stage of development.
+Beyond model development, the project also focused on deployment and usability.The final model was deployed as a **FastAPI** service, exposing prediction endpoints through Swagger UI for interactive testing. **Streamlit** was used separately to visualize MLflow experiment tracking and data drift monitoring.To improve reproducibility and maintainability, the project was organized using a structured repository with comprehensive documentation covering every stage of development.
 
 The complete workflow followed throughout the project is illustrated below.
 
-![Figure 1: Overall System Architecture](../figures/1_Overall_system_architecture.png)
+![](../figures/1_Overall_system_architecture.png)
 
 *Figure 1. Overall architecture of the end-to-end financial fraud detection system, illustrating the inference pipeline from API request to fraud decision and transaction logging.*
 
@@ -81,7 +81,7 @@ This project uses the **Financial Fraud Detection Dataset** published on Kaggle 
 
 The dataset consists of eleven attributes describing different aspects of each transaction. Together, these features capture transaction metadata, account balances before and after the transaction, and the target labels used for fraud detection.
 
-![Figure 2: Dataset Features Description](../figures/2_dataset.png)
+![](../figures/2_dataset.png)
 
 *Figure 2. Dataset features description showing the key attributes, their descriptions, data types, and representative values used in the financial fraud detection dataset.*
 
@@ -136,7 +136,7 @@ The next chapter focuses on **Exploratory Data Analysis (EDA)**, where the datas
 
 Exploratory Data Analysis (EDA) was performed to better understand the dataset before developing machine learning models. The analysis focused on examining data quality, feature distributions, transaction characteristics, and the distribution of fraudulent and legitimate transactions.
 
-The dataset contained **6,362,620 transaction records** across eleven features and showed no significant missing values, allowing the analysis to proceed without extensive data cleaning. One of the most important findings was the severe class imbalance, where fraudulent transactions represented only a small fraction of the dataset. This highlighted the need to evaluate models using precision, recall, and F1-score rather than accuracy alone.
+The dataset contained **6,362,620 transaction records** across eleven features and showed no significant missing values, duplicates, allowing the analysis to proceed without extensive data cleaning. One of the most important findings was the severe class imbalance, where fraudulent transactions represented only a small fraction of the dataset. This highlighted the need to evaluate models using precision, recall, and F1-score rather than accuracy alone.
 
 The analysis also revealed variations in transaction types and a right-skewed distribution of transaction amounts, providing valuable insights for feature engineering and model development. These observations established a strong understanding of the data and guided the preprocessing decisions discussed in the next chapter.
 
@@ -147,7 +147,7 @@ The analysis also revealed variations in transaction types and a right-skewed di
 
 After exploring the dataset, the next step was transforming the raw transaction data into features better suited for machine learning. Rather than relying solely on the original attributes, the preprocessing pipeline focused on preserving information that could improve the model's ability to distinguish between legitimate and fraudulent transactions.
 
-Identifier columns that did not generalize to unseen customers were removed to prevent the model from learning account-specific patterns. Transaction categories were converted into numerical values, and additional behavioural features were engineered using account balances and transaction amounts. These derived features captured characteristics such as balance changes, transaction-to-balance relationships, and unusually large transfers, providing richer information than the raw attributes alone.
+Identifier columns that did not generalize to unseen customers were removed to prevent the model from learning account-specific patterns. Transaction categories were encoded into numerical values, and additional behavioural features were engineered using account balances and transaction amounts. These derived features captured characteristics such as balance changes, transaction-to-balance relationships, and unusually large transfers, providing richer information than the raw attributes alone.
 
 ![Figure 4: Feature Engineering Process](../figures/4_feature_engineering_process.png)
 
@@ -190,7 +190,7 @@ The final production model, **CatBoost**, achieved a **precision of 0.9106**, **
 
 *Figure 6. Confusion matrix of the deployed CatBoost production model. The model correctly classified the overwhelming majority of legitimate transactions while detecting nearly all fraudulent transactions, resulting in only four false negatives and 193 false positives.*
 
-Earlier experiments also compared Balanced Random Forest, XGBoost, and CatBoost under a consistent training pipeline. Although SMOTE-based experiments produced slightly higher experimental scores, the final production model relied on CatBoost's native class weighting to simplify deployment while preserving excellent predictive performance.
+Earlier experiments compared Balanced Random Forest, XGBoost, and CatBoost using SMOTE to address the severe class imbalance. Although SMOTE improved experimental performance, it introduced additional memory overhead during training. For the production pipeline, CatBoost's built-in auto_class_weights="Balanced" was selected because it handled class imbalance without synthetic oversampling, resulting in a simpler and more memory-efficient deployment while maintaining strong predictive performance.
 
 These results demonstrate that the selected model provides a practical balance between accuracy, reliability, and deployment readiness, making it well suited for real-time financial fraud detection.
 
@@ -199,11 +199,11 @@ These results demonstrate that the selected model provides a practical balance b
 
 # Deployment
 
-Developing an accurate fraud detection model was only part of the project. To demonstrate how machine learning systems operate in production, the final solution was deployed as a RESTful API while incorporating practices that improve reproducibility, monitoring, and long-term maintainability.
+Developing an accurate fraud detection model was only part of the project. To demonstrate how machine learning systems operate in production, the final model was deployed as a RESTful API using FastAPI. Swagger UI was used to provide interactive documentation and simplify testing of the prediction endpoints while maintaining reproducibility and long-term maintainability.
 
 Incoming transaction requests are first validated using Pydantic before undergoing the same preprocessing and feature engineering steps applied during training. The processed transaction is then evaluated by the production CatBoost model, which was configured with auto_class_weights="Balanced" to efficiently address class imbalance without requiring oversampled training data during deployment. Based on the predicted fraud probability, the API returns an appropriate decision while recording the transaction and prediction outcome for future analysis.
 
-To ensure reproducible experimentation, MLflow was integrated into the training pipeline. Each training run records model parameters, evaluation metrics, and generated artifacts, allowing different experiments to be compared and reproduced. The selected production model is registered and versioned before being exported for deployment, separating experiment management from the inference service.
+To support reproducibility and model monitoring, **MLflow** was integrated into the training pipeline to track model parameters, evaluation metrics, and generated artifacts across experiments. The selected production model was registered and versioned within MLflow before deployment. A Streamlit dashboard was developed to visualize experiment results and monitor data drift, providing a simple interface for inspecting model performance and identifying changes in incoming transaction data over time.
 
 Beyond deployment, the platform incorporates data drift detection to monitor whether incoming transaction data continues to follow the statistical characteristics of the training dataset. Detecting distributional changes provides an early indication that model performance may degrade over time and that retraining could be required.
 

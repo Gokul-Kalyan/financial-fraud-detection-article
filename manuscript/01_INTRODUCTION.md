@@ -2,7 +2,7 @@
 
 A few months ago, I came across an online store advertising premium shirts at an unbelievably low price. The website looked convincing, the offer seemed genuine, and I completed the purchase without giving it much thought. Days passed with no order confirmation, no shipment updates, and eventually, I realized I had fallen victim to an online shopping scam.
 
-Fortunately, the financial loss was small. What stayed with me, however, was not the ₹200 I lost but the question it raised: **How do financial systems identify and stop fraudulent transactions?** That curiosity became the starting point of this project.
+What stayed with me was not the money I lost, but the curiosity the experience sparked: **How do financial systems identify and stop fraudulent transactions?** That curiosity became the starting point of this project.
 
 That question led me down a path I hadn't expected. I began exploring how banks and payment platforms detect fraudulent transactions, the challenges they face, and the role machine learning plays in identifying suspicious patterns hidden within millions of legitimate transactions. The more I learned, the more I realized that building an effective fraud detection system involves far more than training a machine learning model.
 

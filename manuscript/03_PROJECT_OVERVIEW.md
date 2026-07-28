@@ -10,11 +10,11 @@ Once the data was understood, the next stage involved preparing it for model dev
 
 Several machine learning algorithms were then trained and compared to identify the model that provided the best balance between fraud detection capability and prediction reliability. Each model was evaluated using multiple performance metrics, enabling a comprehensive comparison rather than depending on a single score.
 
-Beyond model development, the project also focused on deployment and usability. The final model was integrated into an interactive **Streamlit** application that allows users to enter transaction details and receive fraud predictions through a simple web interface. To improve reproducibility and maintainability, the project was organized using a structured repository with comprehensive documentation covering every stage of development.
+Beyond model development, the project also focused on deployment and usability.The final model was deployed as a **FastAPI** service, exposing prediction endpoints through Swagger UI for interactive testing. **Streamlit** was used separately to visualize MLflow experiment tracking and data drift monitoring.To improve reproducibility and maintainability, the project was organized using a structured repository with comprehensive documentation covering every stage of development.
 
 The complete workflow followed throughout the project is illustrated below.
 
-![Figure 1: Overall System Architecture](../figures/1_Overall_system_architecture.png)
+![](../figures/1_Overall_system_architecture.png)
 
 *Figure 1. Overall architecture of the end-to-end financial fraud detection system, illustrating the inference pipeline from API request to fraud decision and transaction logging.*
 
